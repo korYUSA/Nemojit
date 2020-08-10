@@ -43,6 +43,14 @@ namespace Nemojit
             RecordFrame.SelectedIndex = 1;
             UnregisterHotKey(main.Handle, 1);
             UnregisterHotKey(main.Handle, 2);
+
+            StringBuilder Theme = new StringBuilder(255);
+            GetPrivateProfileString("General", "Theme", "", Theme, 255, Application.StartupPath + "\\Options.ini");
+            Record.BackColor = ColorTranslator.FromHtml(Theme.ToString());
+            this.BackColor = ColorTranslator.FromHtml(Theme.ToString());
+            Exit.BackColor = ColorTranslator.FromHtml(Theme.ToString());
+            MinimizeBtn.BackColor = ColorTranslator.FromHtml(Theme.ToString());
+
         }
 
 

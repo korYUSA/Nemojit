@@ -35,9 +35,14 @@ namespace Nemojit
             Title.Top = 4;
             Title.Width = this.Width - 8;
             Title.Height = 16;
+            Title.Height -= DeviceDpi / 100;
             this.Left = (Screen.PrimaryScreen.Bounds.Width / 2 - 314);
             this.Top = (Screen.PrimaryScreen.Bounds.Height / 2 - 225);
 
+            while (Title.Height < System.Windows.Forms.TextRenderer.MeasureText(Title.Text, new Font(Title.Font.FontFamily, Title.Font.Size, Title.Font.Style)).Height)
+            {
+                Title.Font = new Font(Title.Font.FontFamily, Title.Font.Size - 0.5f, Title.Font.Style);
+            }
 
             StringBuilder RememberPos = new StringBuilder(255);
             GetPrivateProfileString("General", "RememberPos", "", RememberPos, 255, Application.StartupPath + "\\Options.ini");
@@ -56,6 +61,10 @@ namespace Nemojit
                 this.Left = Convert.ToInt32(savedX.ToString());
                 this.Top = Convert.ToInt32(savedY.ToString());
             }
+
+            StringBuilder Theme = new StringBuilder(255);
+            GetPrivateProfileString("General", "Theme", "", Theme, 255, Application.StartupPath + "\\Options.ini");
+            this.BackColor = ColorTranslator.FromHtml(Theme.ToString());
         }
 
         private const int

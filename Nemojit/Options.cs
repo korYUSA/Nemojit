@@ -479,6 +479,7 @@ namespace Nemojit
             main.RecordSelect.BackColor = color;
             main.Settings.FlatAppearance.BorderColor = color;
             main.Info.BackColor = color;
+            button9.BackColor = color;
         }
 
         private void radioButton5_CheckedChanged(object sender, EventArgs e)
