@@ -1,0 +1,9 @@
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\bin\Debug\Nemojit.exe.config
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\bin\Debug\Nemojit.exe
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\bin\Debug\Nemojit.pdb
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.csprojAssemblyReference.cache
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.Properties.Resources.resources
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.csproj.GenerateResource.cache
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.exe
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.pdb
+C:\중요\프로그래밍\C#\네모짓\Nemojit\Nemojit\obj\Debug\Nemojit.Main.resources
