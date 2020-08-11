@@ -76,6 +76,16 @@ namespace Nemojit
             this.Top = r.top;
             this.Width = r.right - r.left;
             this.Height = r.bottom - r.top;
+
+
+            if (this.Top < Screen.FromPoint(Cursor.Position).WorkingArea.Location.Y)
+                this.Top = Screen.FromPoint(Cursor.Position).WorkingArea.Location.Y;
+            if (this.Left < Screen.FromPoint(Cursor.Position).WorkingArea.Location.X)
+                this.Left = Screen.FromPoint(Cursor.Position).WorkingArea.Location.X;
+            if (this.Right > Screen.FromPoint(Cursor.Position).WorkingArea.Location.X + Screen.FromPoint(Cursor.Position).WorkingArea.Size.Width)
+                this.Width = Screen.FromPoint(Cursor.Position).WorkingArea.Size.Width;
+            if (this.Bottom > Screen.FromPoint(Cursor.Position).WorkingArea.Location.Y + Screen.FromPoint(Cursor.Position).WorkingArea.Size.Height)
+                this.Height = Screen.FromPoint(Cursor.Position).WorkingArea.Size.Height;
         }
 
         private void SelectWindow_Click(object sender, EventArgs e)

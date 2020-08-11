@@ -36,22 +36,23 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.Magenta;
-            this.panel1.Location = new System.Drawing.Point(12, 27);
+            this.panel1.Location = new System.Drawing.Point(12, 25);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(605, 411);
+            this.panel1.Size = new System.Drawing.Size(297, 180);
             this.panel1.TabIndex = 0;
             // 
             // Title
             // 
             this.Title.BackColor = System.Drawing.Color.Transparent;
             this.Title.Cursor = System.Windows.Forms.Cursors.SizeAll;
-            this.Title.Font = new System.Drawing.Font("맑은 고딕", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Title.Font = new System.Drawing.Font("맑은 고딕", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Title.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
             this.Title.Location = new System.Drawing.Point(4, 4);
             this.Title.Name = "Title";
             this.Title.Size = new System.Drawing.Size(600, 16);
             this.Title.TabIndex = 1;
             this.Title.Text = "네모짓 : 영역 선택";
+            this.Title.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.Title.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Area_MouseDown);
             this.Title.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Area_MouseMove);
             // 
@@ -59,7 +60,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(129)))));
-            this.ClientSize = new System.Drawing.Size(629, 450);
+            this.ClientSize = new System.Drawing.Size(321, 224);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;

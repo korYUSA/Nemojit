@@ -29,13 +29,10 @@ namespace Nemojit
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             panel1.Left = 4;
             panel1.Width = this.Width - 8;
-            panel1.Top = 20;
-            panel1.Height = this.Height - 24;
+            panel1.Height = this.Height - 30;
             Title.Left = 4;
-            Title.Top = 4;
             Title.Width = this.Width - 8;
-            Title.Height = 16;
-            Title.Height -= DeviceDpi / 100;
+            Title.Height = 21;
             this.Left = (Screen.PrimaryScreen.Bounds.Width / 2 - 314);
             this.Top = (Screen.PrimaryScreen.Bounds.Height / 2 - 225);
 
@@ -146,7 +143,7 @@ namespace Nemojit
         private void Area_Resize(object sender, EventArgs e)
         {
             panel1.Width = this.Width - 8;
-            panel1.Height = this.Height - 24;
+            panel1.Height = this.Height - 29;
             Title.Width = this.Width - 8;
             Title.Text = "네모짓 : 영역 지정 [" + (this.Width - 8) + "x" + (this.Height - 24) + "]";
             Area_Move(sender, e);

@@ -30,8 +30,6 @@ namespace Nemojit
             button_activeRec.KeyDown -= button_activeRec_KeyDown;
             button_mainRec.KeyDown -= button_mainRec_KeyDown;
 
-            button7.Top = this.Height - 79;
-            button6.Top = this.Height - 119;
 
             /*일반*/
             StringBuilder CloseTray = new StringBuilder(255);
@@ -81,6 +79,7 @@ namespace Nemojit
                 radioButton5.Checked = true;
             else if (SaveFormat.ToString() == "Date")
                 radioButton6.Checked = true;
+            PathExample.Text = "";
 
             /*사용성*/
             StringBuilder Key1Main = new StringBuilder(255);
@@ -467,8 +466,8 @@ namespace Nemojit
             button3.BackColor = color;
             button4.BackColor = color;
             button5.BackColor = color;
-            button6.BackColor = color;
             button7.BackColor = color;
+            button6.BackColor = color;
             button8.BackColor = color;
             TabButton1.BackColor = color;
             button_save.BackColor = color;
