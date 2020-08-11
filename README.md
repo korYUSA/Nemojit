@@ -8,8 +8,11 @@
 
 설치 프로그램 .ahk는 AutoHotkey 1.1.32.02을 기준으로 개발되었습니다.
 
+## 메인 프로그램(Nemojit.exe) 빌드
+1. VisualStudio를 이용해서 Neomjit.sln을 열어 빌드합니다. (이후, \Nemojit\bin\release\ 경로에 Nemojit.exe가 생성됩니다.)
+
+## 설치 프로그램(Setup.exe) 빌드
 1. AutoHotkey를 설치합니다.
-2. VisualStudio를 이용해서 Neomjit.sln을 열어 빌드합니다. (이후, \Nemojit\bin\release\ 경로에 Nemojit.exe가 생성됩니다.)
-3. \Nemojit\bin\release\ 경로에 있는 uninsall.ahk를 컴파일합니다. (uninstall.exe가 생성됩니다.)
-4. \Nemojit\bin\release\ 경로에 있는 Setup.ahk를 컴파일합니다. (Setup.exe가 생성됩니다.)
-5. 배포 시에는 Setup.exe와 같은 경로에 있는 License, SetupImage 폴더를 함께 묶어서 제공합니다. 나머지 파일들은 Setup.ahk를 컴파일 한 뒤 Setup.exe안에 포함되어 컴파일됩니다.
+2. \Nemojit\bin\release\ 경로에 있는 uninsall.ahk를 컴파일합니다. (uninstall.exe가 생성됩니다.)
+3. \Nemojit\bin\release\ 경로에 있는 Setup.ahk를 컴파일합니다. (Setup.exe가 생성됩니다.)
+4. 배포 시에는 Setup.exe와 같은 경로에 있는 License, SetupImage 폴더를 함께 묶어서 제공합니다. 나머지 파일들은 Setup.exe안에 포함되어 컴파일됩니다.
