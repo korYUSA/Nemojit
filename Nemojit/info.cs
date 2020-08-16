@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -24,6 +25,21 @@ namespace Nemojit
             button1.BackColor = ColorTranslator.FromHtml(Theme.ToString());
             button2.BackColor = ColorTranslator.FromHtml(Theme.ToString());
             button3.BackColor = ColorTranslator.FromHtml(Theme.ToString());
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://nemojit.github.io/");
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://nemojit.github.io/contact");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://nemojit.github.io/donate");
         }
     }
 }

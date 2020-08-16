@@ -42,7 +42,7 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>logoicon.ico</ApplicationIcon>
+    <ApplicationIcon>128icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="DirectShowLib-2005, Version=2.1.0.0, Culture=neutral, PublicKeyToken=67e7b740cdfc2d3f, processorArchitecture=MSIL">
@@ -160,10 +160,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\LogoIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
+    <Content Include="128icon.ico" />
     <Content Include="logoicon.ico" />
+    <None Include="Resources\500x500.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

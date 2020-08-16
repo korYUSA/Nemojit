@@ -8,7 +8,7 @@ if not A_IsAdmin
     ExitApp
 }
 
-version := "v0.9 ~ beta1"
+version := "v0.9 ~ beta2"
 global state = "normal"
 
 Gui, Color, FFFFFF

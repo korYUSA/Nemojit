@@ -55,7 +55,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 18);
             this.label1.TabIndex = 2;
-            this.label1.Text = "현재 버전: v0.9 ~ beta 1";
+            this.label1.Text = "현재 버전: v0.9 ~ beta 2";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button1
@@ -71,6 +71,7 @@
             this.button1.TabIndex = 3;
             this.button1.Text = "문의하기";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
@@ -85,6 +86,7 @@
             this.button2.TabIndex = 4;
             this.button2.Text = "후원하기";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label3
             // 
@@ -109,6 +111,7 @@
             this.button3.TabIndex = 7;
             this.button3.Text = "공식 홈페이지";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // info
             // 
