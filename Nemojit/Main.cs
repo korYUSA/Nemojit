@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
 using System.Media;
+using Microsoft.Win32;
 
 namespace Nemojit
 {
@@ -409,31 +410,41 @@ namespace Nemojit
             string audio = "";
             string audio2 = "";
 
+            WriteRegistry("start_x", offsetX);
+            WriteRegistry("start_y", offsetY);
+            WriteRegistry("capture_width", offsetW);
+            WriteRegistry("capture_height", offsetH);
+
+
             if (Sound.ToString() == "1")
             {
-                audio = @"-y -rtbufsize 150M -f dshow -i audio=""virtual-audio-capturer""";
-                if (Type == "PrimaryScreen")
-                    audio = @"-y -rtbufsize 150M -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
             }
             else if (Sound.ToString() == "2")
             {
-                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @"""";
-                if (Type == "PrimaryScreen")
-                    audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @""":video=""screen-capture-recorder""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @""":video=""screen-capture-recorder""";
             }
             else if (Sound.ToString() == "3")
             {
-                audio = @"-f dshow -i audio=""" + AudioDevice + @""" -f dshow -i audio=""virtual-audio-capturer""";
-                audio2 = @"-filter_complex ""[0:a][1:a]amerge = inputs = 2[a]"" -map 2 -map ""[a]""";
-                if (Type == "PrimaryScreen")
-                    audio = @"-f dshow -i audio=""" + AudioDevice + @""" -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
+               // audio2 = @"-filter_complex ""[0:a][1:a]amerge = inputs = 2[a]"" -map 2 -map ""[a]""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @""" -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
             }
-            if (Type == "PrimaryScreen")
-                process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + 60 + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX) + " -offset_y " + (offsetY) + " -video_size " + (offsetW) + "x" + (offsetH) + @" -i desktop -c:v libx264 -r " + 60 + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
-            else   
-                process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + 60 + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX) + " -offset_y " + (offsetY) + " -video_size " + (offsetW) + "x" + (offsetH) + @" -i desktop -c:v libx264 -r " + 60 + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
+            //if (Type == "PrimaryScreen")
+            {
+                process.StandardInput.Write(@"""" + Application.StartupPath + @"\ffmpeg-Nemojit.exe"" " + audio + @" -framerate " + 60 + " -probesize 10M -draw_mouse 1 -c:v libx264 -r " + 60 + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
+            }
+           // else   
+            //    process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + 60 + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX) + " -offset_y " + (offsetY) + " -video_size " + (offsetW) + "x" + (offsetH) + @" -i desktop -c:v libx264 -r " + 60 + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
             
             return;
+        }
+
+        private void WriteRegistry(string rKey, int rVal)
+        {
+            RegistryKey reg = Registry.CurrentUser;
+            reg = reg.CreateSubKey(@"Software\screen-capture-recorder", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            reg.SetValue(rKey, rVal);
+            reg.Close();
         }
 
         public void Stop()

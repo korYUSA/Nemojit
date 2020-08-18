@@ -385,9 +385,15 @@ namespace Nemojit
                 DsDevice[] capDevices = DsDevice.GetDevicesOfCat(FilterCategory.AudioInputDevice);
                 for (int i = 0; i < capDevices.Length;i++)
                     comboBox1.Items.Add(capDevices[i].Name);
-                StringBuilder AudioDevice = new StringBuilder(255);
-                GetPrivateProfileString("Rec", "AudioDevice", "", AudioDevice, 255, Application.StartupPath + "\\Options.ini");
-                comboBox1.SelectedItem = AudioDevice.ToString();
+                try
+                {
+                    StringBuilder AudioDevice = new StringBuilder(255);
+                    GetPrivateProfileString("Rec", "AudioDevice", "", AudioDevice, 255, Application.StartupPath + "\\Options.ini");
+                    if (AudioDevice.ToString() == "")
+                        comboBox1.SelectedIndex = 0;
+                    comboBox1.SelectedItem = AudioDevice.ToString();
+                }
+                catch { }
             }
             else
             {
@@ -425,7 +431,8 @@ namespace Nemojit
             process.StartInfo = processInfo;
             process.Start();
             process.StandardInput.Write(@"cd " + Application.StartupPath + Environment.NewLine);
-            process.StandardInput.Write(@"regsvr32 virtual-audio-capturer-x64.dll"+ Environment.NewLine);
+            process.StandardInput.Write(@"regsvr32 virtual-audio-capturer-x64.dll" + Environment.NewLine);
+            process.StandardInput.Write(@"regsvr32 screen-capture-recorder-x64.dll" + Environment.NewLine);
             process.Close();
         }
 

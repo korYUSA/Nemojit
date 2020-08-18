@@ -35,6 +35,7 @@
             // 
             // GetMousePos
             // 
+            this.GetMousePos.Interval = 1000;
             this.GetMousePos.Tick += new System.EventHandler(this.GetMousePos_Tick);
             // 
             // SelectWindow

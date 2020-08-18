@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -91,9 +92,19 @@ namespace Nemojit
             try
             {
                 Application.OpenForms["Area"].Close();
-                return;
             }
             catch { }
+            try
+            {
+                Application.OpenForms["SelectWindow"].Close();
+            }
+            catch { }
+            try
+            {
+                Application.OpenForms["SelectMonitor"].Close();
+            }
+            catch { }
+            main.Hotkey_Reload(1, 1, 1);
             return;
         }
 
@@ -157,9 +168,9 @@ namespace Nemojit
             process.Start();
 
             int offsetX = Application.OpenForms["Area"].Left + 4;
-            int offsetY = Application.OpenForms["Area"].Top + 20;
+            int offsetY = Application.OpenForms["Area"].Top + 25;
             int offsetW = Application.OpenForms["Area"].Width - 8;
-            int offsetH = Application.OpenForms["Area"].Height - 24;
+            int offsetH = Application.OpenForms["Area"].Height - 29;
 
             StringBuilder Sound = new StringBuilder(255);
             GetPrivateProfileString("Rec", "Sound", "", Sound, 255, Application.StartupPath + "\\Options.ini");
@@ -190,33 +201,54 @@ namespace Nemojit
             string audio = "";
             string audio2 = "";
 
+            if (RecordType.SelectedIndex != 2)
+            {
+                WriteRegistry("start_x", offsetX - 4);
+                WriteRegistry("start_y", offsetY - 25);
+                WriteRegistry("capture_width", offsetW + 8);
+                WriteRegistry("capture_height", offsetH + 29);
+            }
+            else
+            {
+                WriteRegistry("start_x", offsetX);
+                WriteRegistry("start_y", offsetY);
+                WriteRegistry("capture_width", offsetW);
+                WriteRegistry("capture_height", offsetH);
+            }
+
+
             if (Sound.ToString() == "1")
             {
-                audio = @"-y -rtbufsize 150M -f dshow -i audio=""virtual-audio-capturer""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
             }
             else if (Sound.ToString() == "2")
             {
-                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @"""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @""":video=""screen-capture-recorder""";
             }
             else if (Sound.ToString() == "3")
             {
-                audio = @"-f dshow -i audio=""" + AudioDevice + @""" -f dshow -i audio=""virtual-audio-capturer""";
-                audio2 = @"-filter_complex ""[0:a][1:a]amerge = inputs = 2[a]"" -map 2 -map ""[a]""";
+                //audio2 = @"-filter_complex ""[0:a][1:a]amerge = inputs = 2[a]"" -map 2 -map ""[a]""";
+                audio = @"-y -rtbufsize 150M -f dshow -i audio=""" + AudioDevice + @""" -f dshow -i audio=""virtual-audio-capturer"":video=""screen-capture-recorder""";
             }
 
             if (RecordType.SelectedIndex != 2)
             {
                 Application.OpenForms["Area"].Hide();
-                process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX - 4) + " -offset_y " + (offsetY - 20) + " -video_size " + (offsetW + 8) + "x" + (offsetH + 24) + @" -i desktop -c:v libx264 -r " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
-                
             }
-            else
-            {
-                process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX) + " -offset_y " + (offsetY) + " -video_size " + (offsetW) + "x" + (offsetH) + @" -i desktop -c:v libx264 -r " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
-            }
+            //process.StandardInput.Write(Application.StartupPath + @"\ffmpeg-Nemojit.exe -y -rtbufsize 150M " + audio + @" -f gdigrab -framerate " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + " -probesize 10M -draw_mouse 1 -offset_x " + (offsetX - 4) + " -offset_y " + (offsetY - 20) + " -video_size " + (offsetW + 8) + "x" + (offsetH + 24) + @" -i desktop -c:v libx264 -r " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
+            process.StandardInput.Write(@"""" + Application.StartupPath + @"\ffmpeg-Nemojit.exe"" " + audio + @" -framerate " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + " -probesize 10M -draw_mouse 1 -c:v libx264 -r " + RecordFrame.SelectedItem.ToString().Substring(0, 2) + @" -preset ultrafast -tune zerolatency -crf " + CRF + @" -vf ""pad = ceil(iw / 2) * 2:ceil(ih / 2) * 2"" -pix_fmt yuv420p -y " + audio2 + @" """ + path + @"\" + FileName + @"""" + Environment.NewLine);
+               
             Timer.Start();
             SW.Start();
             return;
+        }
+
+        private void WriteRegistry(string rKey, int rVal)
+        {
+            RegistryKey reg = Registry.CurrentUser;
+            reg = reg.CreateSubKey(@"Software\screen-capture-recorder", RegistryKeyPermissionCheck.ReadWriteSubTree);
+            reg.SetValue(rKey, rVal);
+            reg.Close();
         }
 
         public void Stop()

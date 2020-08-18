@@ -64,7 +64,7 @@ namespace Nemojit
 
             IntPtr rootHandle = GetAncestor(hwnd, GetAncestorFlags.GetRoot);
 
-            if (GetWindowTitle(rootHandle).ToString() == "")
+            if (GetWindowTitle(rootHandle).ToString() == "" || GetWindowTitle(rootHandle).ToString() == "Program Manager")
                 return;
 
             GetWindowRect((int)rootHandle, ref stRect);

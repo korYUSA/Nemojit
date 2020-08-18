@@ -8,7 +8,14 @@ if not A_IsAdmin
     ExitApp
 }
 
-version := "v0.9 ~ beta2"
+if (SubStr(A_OSVersion, 1, 2) != 10 || A_Is64bitOS = false)
+{
+	BitName := A_Is64bitOS ? "64비트" : "32비트"
+	MsgBox, % "네모짓은 Windows 10 (64비트)에서만 지원합니다.`n`n요구 OS 버전: 10.0+, 64비트`n사용자 컴퓨터: " A_OSVersion ", " BitName
+	ExitApp
+}
+
+version := "v0.9 ~ beta3"
 global state = "normal"
 
 Gui, Color, FFFFFF
@@ -59,7 +66,7 @@ else if (page = 3)
 	FileInstall, Nemojit.exe.config, %installPath%\Nemojit\Nemojit.exe.config, 1
 	GuiControl,,ProgressBar,4
 	FileInstall, virtual-audio-capturer-x64.dll, %installPath%\Nemojit\virtual-audio-capturer-x64.dll, 1
-	FileInstall, virtual-audio-capturer-x64.dll, %installPath%\Nemojit\screen-capture-recorder-x64.dll, 1
+	FileInstall, screen-capture-recorder-x64.dll, %installPath%\Nemojit\screen-capture-recorder-x64.dll, 1
 	GuiControl,,ProgressBar,6
 	FileInstall, ffmpeg-Nemojit.exe, %installPath%\Nemojit\ffmpeg-Nemojit.exe, 1
 	GuiControl,,ProgressBar,75

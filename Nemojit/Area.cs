@@ -29,7 +29,7 @@ namespace Nemojit
             this.SetStyle(ControlStyles.ResizeRedraw, true);
             panel1.Left = 4;
             panel1.Width = this.Width - 8;
-            panel1.Height = this.Height - 30;
+            panel1.Height = this.Height - 29;
             Title.Left = 4;
             Title.Width = this.Width - 8;
             Title.Height = 21;
@@ -145,7 +145,7 @@ namespace Nemojit
             panel1.Width = this.Width - 8;
             panel1.Height = this.Height - 29;
             Title.Width = this.Width - 8;
-            Title.Text = "네모짓 : 영역 지정 [" + (this.Width - 8) + "x" + (this.Height - 24) + "]";
+            Title.Text = "네모짓 : 영역 지정 [" + (this.Width - 8) + "x" + (this.Height - 29) + "]";
             Area_Move(sender, e);
             /*
             if (RecorderForm.RecordType.SelectedIndex == 0)

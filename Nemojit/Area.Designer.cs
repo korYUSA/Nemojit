@@ -60,7 +60,7 @@
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(15)))), ((int)(((byte)(75)))), ((int)(((byte)(129)))));
-            this.ClientSize = new System.Drawing.Size(321, 224);
+            this.ClientSize = new System.Drawing.Size(629, 450);
             this.Controls.Add(this.Title);
             this.Controls.Add(this.panel1);
             this.DoubleBuffered = true;
