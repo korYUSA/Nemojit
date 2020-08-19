@@ -15,7 +15,7 @@ if (SubStr(A_OSVersion, 1, 2) != 10 || A_Is64bitOS = false)
 	ExitApp
 }
 
-version := "v0.9 ~ beta3"
+version := "v1.0"
 global state = "normal"
 
 Gui, Color, FFFFFF
@@ -26,19 +26,20 @@ Gui, Add, Text, x100 y150 w400 Center vText2, 네모짓을 선택해주셔서 �
 Gui, Add, Pic, x260 y370 w80 h23 vBtnPic gBtnPic, SetupImage\다음.png
 Gui, Show, w600 h425, 네모짓 설치하기
 OnMessage(0x200, "OnMouseMove")
+page := 0
 return
 
 BtnPic:
-page++
-if (page = 1)
+if (page = 0)
 {
 	FileRead, license, License\네모짓\license.txt
 	Gui, Add, Text, x20 y20 w560 vText3, 다음을 누르면 라이선스에 동의하는 것으로 간주됩니다.
 	Gui, Add, Edit, x20 y50 w560 h295 vEdit1 ReadOnly, %license%
 	GuiControl,Hide,Text1
 	GuiControl,Hide,Text2
+	page++
 }
-else if (page = 2)
+else if (page = 1)
 {
 	GuiControl, Hide, Edit1
 	Gui, Font, s9, 굴림
@@ -46,9 +47,12 @@ else if (page = 2)
 	Gui, Add, Button, x320 y49 w80 h22 vPathBtn +0x8000 gPathBtn , 경로지정
 	Gui, Add, CheckBox, x20 y80 w300 h22 vDesktopShortcut Checked, 바탕화면에 바로가기 설정
 	GuiControl,,Text3, 저장 경로 및 바탕화면 바로가기 설정
+	page++
 }
-else if (page = 3)
+else if (page = 2)
 {
+	Gui, +AlwaysOnTop
+	run, https://nemojit.github.io/thanks,,Max
 	GuiControl,Disabled,BtnPic
 	Gui, Submit, NoHide
 	installPath := SubStr(Path, 1, StrLen(Path) - 1)
@@ -58,7 +62,6 @@ else if (page = 3)
 	GuiControl, Hide, Path
 	GuiControl, Hide, PathBtn
 	GuiControl, Hide, DesktopShortcut
-	
 	FileCreateDir, %installPath%\Nemojit
 	GuiControl,,ProgressBar,1
 	FileInstall, Nemojit.exe, %installPath%\Nemojit\Nemojit.exe, 1
@@ -115,8 +118,8 @@ else if (page = 3)
 	IniWrite, Number, %installPath%\Nemojit\Options.ini, Save, SaveFormat
 	IniWrite, %A_Desktop%, %installPath%\Nemojit\Options.ini, Save, SavePath
 	GuiControl,,ProgressBar,94
-	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\virtual-audio-capturer-x64.dll,, Hide
-	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\screen-capture-recorder-x64.dll,, Hide
+	Run, *RunAs %Comspec% /c /s RegSvr32 %installPath%\Nemojit\virtual-audio-capturer-x64.dll,, Hide
+	Run, *RunAs %Comspec% /c /s RegSvr32 %installPath%\Nemojit\screen-capture-recorder-x64.dll,, Hide
 	GuiControl,,ProgressBar,97
 	if (isShortcut = 1)
 	{
@@ -131,11 +134,12 @@ else if (page = 3)
 	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, DisplayVersion, %version%
 	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, Publisher, FLOW
 	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, UninstallString, %installPath%\Nemojit\uninstall.exe
-	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, URLInfoAbout, https://github.com/korYUSA/Nemojit
+	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, URLInfoAbout, https://nemojit.github.io
 	RegWrite,REG_SZ,HKLM,SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Nemojit, patha, %installPath%\Nemojit\
 	GuiControl,,ProgressBar,100
 	GuiControl,Enabled,BtnPic
 	GuiControl,,Text3, 설치가 완료되었습니다.
+	page++
 }
 else
 	ExitApp
