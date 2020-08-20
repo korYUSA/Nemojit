@@ -9,7 +9,7 @@ Contact: yusa@kakao.com
 # How to Build
 네모짓은 C# winform으로 개발되었으며, .NET Framework 4.7을 사용합니다. VisualStudio 2019 Community를 사용했습니다.
 
-설치 프로그램 .ahk는 AutoHotkey 1.1.32.02을 기준으로 개발되었습니다.
+설치 프로그램 .ahk는 AutoHotkey 1.1.32.00을 기준으로 개발되었습니다.
 
 ## 메인 프로그램(Nemojit.exe) 빌드
 1. VisualStudio를 이용해서 Neomjit.sln을 열어 빌드합니다. (이후, \Nemojit\bin\release\ 경로에 Nemojit.exe가 생성됩니다.)
