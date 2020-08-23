@@ -15,7 +15,7 @@ if (SubStr(A_OSVersion, 1, 2) != 10 || A_Is64bitOS = false)
 	ExitApp
 }
 
-version := "v1.0"
+version := "v1.0.1"
 global state = "normal"
 
 Gui, Color, FFFFFF
@@ -151,6 +151,9 @@ FileSelectFolder, PathDir
 if (pathDir = "")
 	return
 GuiControl,,Path,%PathDir%
+Gui, Submit, NoHide
+if (SubStr(Path, 0, 1) != "\")
+	GuiControl,,Path,%Path%\
 return
 
 GuiClose:

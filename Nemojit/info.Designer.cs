@@ -55,7 +55,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(260, 18);
             this.label1.TabIndex = 2;
-            this.label1.Text = "현재 버전: v1.0";
+            this.label1.Text = "현재 버전: v1.0.1";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // button1
