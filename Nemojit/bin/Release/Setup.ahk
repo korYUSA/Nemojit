@@ -15,7 +15,7 @@ if (SubStr(A_OSVersion, 1, 2) != 10 || A_Is64bitOS = false)
 	ExitApp
 }
 
-version := "v1.0.1"
+version := "v1.0.2"
 global state = "normal"
 
 Gui, Color, FFFFFF
@@ -118,8 +118,9 @@ else if (page = 2)
 	IniWrite, Number, %installPath%\Nemojit\Options.ini, Save, SaveFormat
 	IniWrite, %A_Desktop%, %installPath%\Nemojit\Options.ini, Save, SavePath
 	GuiControl,,ProgressBar,94
-	Run, *RunAs %Comspec% /c /s RegSvr32 %installPath%\Nemojit\virtual-audio-capturer-x64.dll,, Hide
-	Run, *RunAs %Comspec% /c /s RegSvr32 %installPath%\Nemojit\screen-capture-recorder-x64.dll,, Hide
+	Gui, -AlwaysOnTop
+	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\virtual-audio-capturer-x64.dll,, Hide
+	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\screen-capture-recorder-x64.dll,, Hide
 	GuiControl,,ProgressBar,97
 	if (isShortcut = 1)
 	{
