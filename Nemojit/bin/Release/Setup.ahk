@@ -15,7 +15,7 @@ if (SubStr(A_OSVersion, 1, 2) != 10 || A_Is64bitOS = false)
 	ExitApp
 }
 
-version := "v1.0.2"
+version := "v1.0.3"
 global state = "normal"
 
 Gui, Color, FFFFFF
@@ -93,8 +93,8 @@ else if (page = 2)
 	GuiControl,,ProgressBar,88
 	FileInstall, Microsoft.WindowsAPICodePack.Shell.xml, %installPath%\Nemojit\Microsoft.WindowsAPICodePack.Shell.xml, 1
 	GuiControl,,ProgressBar,89
-	IniWrite,% A_ScreenWidth / 2 - 314, %installPath%\Nemojit\Options.ini, AreaSave, AreaX
-	IniWrite,% A_ScreenHeight / 2 - 225, %installPath%\Nemojit\Options.ini, AreaSave, AreaY
+	IniWrite,% Round(A_ScreenWidth / 2 - 314), %installPath%\Nemojit\Options.ini, AreaSave, AreaX
+	IniWrite,% Round(A_ScreenHeight / 2 - 225), %installPath%\Nemojit\Options.ini, AreaSave, AreaY
 	IniWrite, 629, %installPath%\Nemojit\Options.ini, AreaSave, AreaW
 	IniWrite, 450, %installPath%\Nemojit\Options.ini, AreaSave, AreaH
 	GuiControl,,ProgressBar,90
@@ -106,7 +106,7 @@ else if (page = 2)
 	IniWrite, 4, %installPath%\Nemojit\Options.ini, HotkeySave, Key3Sub
 	GuiControl,,ProgressBar,91
 	IniWrite, 0, %installPath%\Nemojit\Options.ini, General, CloseTray
-	IniWrite, 0, %installPath%\Nemojit\Options.ini, General, RememberPos
+	IniWrite, 1, %installPath%\Nemojit\Options.ini, General, RememberPos
 	IniWrite, #0F4B81, %installPath%\Nemojit\Options.ini, General, Theme
 	GuiControl,,ProgressBar,92
 	IniWrite, 0, %installPath%\Nemojit\Options.ini, Rec, CloseControler
@@ -119,8 +119,8 @@ else if (page = 2)
 	IniWrite, %A_Desktop%, %installPath%\Nemojit\Options.ini, Save, SavePath
 	GuiControl,,ProgressBar,94
 	Gui, -AlwaysOnTop
-	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\virtual-audio-capturer-x64.dll,, Hide
-	Run, *RunAs %Comspec% /c RegSvr32 %installPath%\Nemojit\screen-capture-recorder-x64.dll,, Hide
+	Run, *RunAs %Comspec% /c RegSvr32 "%installPath%\Nemojit\virtual-audio-capturer-x64.dll",, Hide
+	Run, *RunAs %Comspec% /c RegSvr32 "%installPath%\Nemojit\screen-capture-recorder-x64.dll",, Hide
 	GuiControl,,ProgressBar,97
 	if (isShortcut = 1)
 	{
